@@ -42,6 +42,3 @@ def snippets_to_mcqs(snippets):
           results.append(mcq)
     
   return { 'questions': results }
-
-if __name__ == '__main__':
-    app.run(host = "localhost", port = 8000, debug = False)

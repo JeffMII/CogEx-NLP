@@ -1,7 +1,5 @@
-import os
 from flask import Flask, request
 from pprint import pprint
-import nltk
 from Questgen import main
 
 app = Flask(__name__)

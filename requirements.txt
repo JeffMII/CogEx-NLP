@@ -1,5 +1,4 @@
 Flask==2.0.1
-nltk==3.6.3
-Questgen==1.0.0
+git+https://github.com/JeffMII/Questgen.ai.git
 spacy==2.2.4
 sense2vec==1.0.3

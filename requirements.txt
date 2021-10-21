@@ -2,4 +2,4 @@ Flask==2.0.1
 spacy==2.2.4
 sense2vec==1.0.3
 git+https://github.com/JeffMII/Questgen.ai.git
-git+https://github.com/boudinfl/pke.git
+git+https://github.com/JeffMII/pke.git

@@ -1,8 +1,10 @@
+import nltk
 from flask import Flask, request
-from pprint import pprint
 from Questgen import main
 
 app = Flask(__name__)
+
+nltk.download('stopwords')
 
 qg = main.QGen()
 ap = main.AnswerPredictor()

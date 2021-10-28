@@ -10,7 +10,7 @@ ap = main.AnswerPredictor()
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Running"
 
 @app.post('/generate/multiple-choice-questions')
 def gen_mcqs():
@@ -39,7 +39,10 @@ def snippets_to_mcqs(snippets):
       for mcq in mcqs['questions']:
         ans = ap.predict_answer({ 'input_text': mcq['context'], 'input_question': mcq['question_statement']})
 
-        if mcq['answer'].lower() == ans.lower():
+        if mcq['answer'].lower() in ans.lower() or ans.lower() in mcq['answer'].lower():
           results.append(mcq)
     
   return { 'questions': results }
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=80)

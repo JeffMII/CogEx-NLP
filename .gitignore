@@ -73,3 +73,5 @@ target/
 
 # Pycharm project files
 /.idea/
+
+key.py

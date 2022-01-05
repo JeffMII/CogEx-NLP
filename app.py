@@ -1,14 +1,13 @@
 import nltk
-nltk.download('stopwords')
 from flask import Flask, request
 from Questgen import main
-from pyngrok import ngrok
-from key import getKey
+# from pyngrok import ngrok
+# from key import getKey
 
-http = ngrok.set_auth_token(getKey())
-http = ngrok.connect(80)
-print(http.api_url)
-print(http.public_url)
+nltk.download('stopwords')
+
+# http = ngrok.set_auth_token(getKey())
+# http = ngrok.connect(80)
 
 app = Flask(__name__)
 

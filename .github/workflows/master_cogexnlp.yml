@@ -22,8 +22,8 @@ jobs:
         with:
           python-version: '3.9'
           
-      - name: Istall GCC
-        run: apt-get install build-essential python-dev
+      - name: Check GCC installed
+        run: gcc --version
 
       - name: Create and start virtual environment
         run: |

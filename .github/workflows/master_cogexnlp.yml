@@ -21,17 +21,11 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: '3.7'
-          
-      - name: Check GCC installed
-        run: gcc --version
 
       - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
-          
-      - name: Install wheel package
-        run: pip install wheel
       
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -66,4 +60,4 @@ jobs:
         with:
           app-name: 'CogexNLP'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B8A370217DA647C9AC1FF992272B9B6A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BAAB174A4151412E9C748A49109C0CD0 }}

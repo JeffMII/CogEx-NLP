@@ -1,2 +1,0 @@
-pyngrok==5.1.0
-git+https://github.com/JeffMII/pke.git

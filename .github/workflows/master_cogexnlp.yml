@@ -35,6 +35,11 @@ jobs:
       - name: Download en
         run: python -m spacy download en
         
+      - name: Get libblas
+        run: |
+          apt-get update
+          apt-get install libcblas-dev
+        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
       - name: Upload artifact for deployment jobs

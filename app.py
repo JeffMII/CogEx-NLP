@@ -1,20 +1,13 @@
 import nltk
 from flask import Flask, request
 from Questgen import main
-# from pyngrok import ngrok
-# from key import getKey
-
-# nltk.download('stopwords')
-
-# http = ngrok.set_auth_token(getKey())
-# http = ngrok.connect(80)
 
 app = Flask(__name__)
 
 qg = main.QGen()
 ap = main.AnswerPredictor()
 
-@app.get("/")
+@app.get("/check")
 def hello():
     return { 'running': True }
 

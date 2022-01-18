@@ -4,7 +4,7 @@ from Questgen import main
 # from pyngrok import ngrok
 # from key import getKey
 
-nltk.download('stopwords')
+# nltk.download('stopwords')
 
 # http = ngrok.set_auth_token(getKey())
 # http = ngrok.connect(80)
@@ -14,9 +14,9 @@ app = Flask(__name__)
 qg = main.QGen()
 ap = main.AnswerPredictor()
 
-@app.route("/")
+@app.get("/")
 def hello():
-    return "Running"
+    return { 'running': True }
 
 @app.post('/generate/multiple-choice-questions')
 def gen_mcqs():
@@ -52,4 +52,4 @@ def snippets_to_mcqs(snippets):
   return { 'questions': results }
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=80)
+  app.run()

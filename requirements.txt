@@ -1,5 +1,7 @@
-Flask==2.0.1
-spacy==3.0.0
-sense2vec==2.0.0
-nltk==3.6.3
+Flask>=2.0.1
+spacy>=3.0.0
+sense2vec>=2.0.0
+nltk>=3.6.3
+wheel
+git+https://github.com/JeffMII/pke.git
 git+https://github.com/JeffMII/Questgen.ai.git

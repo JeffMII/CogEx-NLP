@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.8'
+          python-version: '3.7'
 
       - name: Create and start virtual environment
         run: |
@@ -28,17 +28,7 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          pip install wheel
-          pip install -r requirements.txt
-        
-      - name: Download en
-        run: python -m spacy download en
-        
-      - name: Get libblas
-        run: |
-          sudo apt-get update
-          sudo apt-get install libcblas-dev
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
@@ -70,4 +60,4 @@ jobs:
         with:
           app-name: 'CogexNLP'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BAAB174A4151412E9C748A49109C0CD0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AE20318F7B5B406BA70B505F0BA1C0BB }}

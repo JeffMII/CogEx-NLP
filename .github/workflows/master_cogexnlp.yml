@@ -59,7 +59,7 @@ jobs:
       - name: Setup environment
         run: |
           python -m pip install --upgrade pip
-          apt-get install git
+          sudo apt-get install git
           
       - name: Download artifact from build job
         uses: actions/download-artifact@v2

@@ -35,6 +35,11 @@ jobs:
       - name: Download en
         run: python -m spacy download en_core_web_sm
         
+      - name: Get libblas
+        run: |
+          sudo apt-get update
+          sudo apt-get install libcblas-dev
+        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
       - name: Upload artifact for deployment jobs

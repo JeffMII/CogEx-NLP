@@ -1,3 +1,2 @@
 Flask>=2.0.1
-git+https://github.com/JeffMII/pke.git
 git+https://github.com/JeffMII/Questgen.ai.git

@@ -75,4 +75,4 @@ target/
 /.idea/
 
 key.py
-.github/workflows
+/.github/workflows/

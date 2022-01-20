@@ -1,4 +1,3 @@
-import nltk
 from flask import Flask, request
 from Questgen import main
 

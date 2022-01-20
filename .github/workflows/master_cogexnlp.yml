@@ -33,7 +33,7 @@ jobs:
           pip install -r requirements.txt
         
       - name: Download en
-        run: python -m spacy download en_core_web_sm
+        run: python -m spacy download en
         
       - name: Get libblas
         run: |

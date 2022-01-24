@@ -56,6 +56,10 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Setup environment
+        run: |
+          python -m pip install --upgrade pip
+          
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:

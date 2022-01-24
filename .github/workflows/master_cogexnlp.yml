@@ -47,15 +47,12 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:          
+    steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: python-app
           path: .
-          
-      - name: Download en_core_web_sm
-        run: python -m spacy download en_core_web_sm
       
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2

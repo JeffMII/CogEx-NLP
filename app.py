@@ -43,7 +43,6 @@ class Generator(Thread):
     Thread.__init__(self)
     self.news_id = news_id
     self.info = json.loads(os.getenv('MYSQL_INFO'))
-    print(self.info)
   
   def run(self):
     news_id = self.news_id
@@ -61,49 +60,59 @@ class Generator(Thread):
     return
   
   def snippets_to_mcqs(self):
-    news_id = self.news_id
-    
-    sql = f"select (news_json) from news where news_id='{news_id}'"
-    news = self.query(sql)
-    news_json = json.loads(news[0]['news_json'])
-    
-    snippets = [news_json['newsDescription']]
-    
-    results = []
-    
-    for snippet in snippets:
-      statements = snippet.split('\n')
+    try:
+      news_id = self.news_id
       
-      for statement in statements:
-        mcqs = qg.predict_mcq({ 'input_text': statement })
+      sql = f"select (news_json) from news where news_id='{news_id}'"
+      news = self.query(sql)
+      news_json = json.loads(news[0]['news_json'])
+      
+      snippets = [news_json['newsDescription']]
+      
+      results = []
+      
+      for snippet in snippets:
+        statements = snippet.split('\n')
         
-        for mcq in mcqs['questions']:
-          ans = ap.predict_answer({ 'input_text': mcq['context'], 'input_question': mcq['question_statement'] })
-          
-          if mcq['answer'].lower() in ans.lower() or ans.lower() in mcq['answer'].lower():
-            mcq.pop('id')
-            results.append(mcq)
-    
-    if len(results) > 0:
+        for statement in statements:
+          mcqs = qg.predict_mcq({ 'input_text': statement })
       
-      names = '(news_question_id, news_id, news_question_json)'
-      values = []
-      sep = ', '
+          if len(mcqs) > 0:
+      
+            for mcq in mcqs['questions']:
+              ans = ap.predict_answer({ 'input_text': mcq['context'], 'input_question': mcq['question_statement'] })
+      
+              if mcq['answer'].lower() in ans.lower() or ans.lower() in mcq['answer'].lower():
+                mcq.pop('id')
+                results.append(mcq)
+      
+      if len(results) > 0:
+        
+        names = '(news_question_id, news_id, news_question_json)'
+        values = []
+        sep = ', '
 
-      for result in results:
-      
-        result = json.dumps(result)
+        for result in results:
         
-        hash = hashlib.new('sha256')
-        hash.update(result.encode())
-        question_id = hash.hexdigest()
+          result = json.dumps(result)
+          hash = hashlib.new('sha256')
+          hash.update(result.encode())
+          question_id = hash.hexdigest()
+          result = result.replace("'", "\\'")
+          print('\n', result, '\n')
+          values.append(f"('{question_id}', '{news_id}', '{result}')")
         
-        values.append(f"('{question_id}', '{news_id}', '{result}')")
-      
-      values = sep.join(values)
-      
-      sql = f'insert into news_questions {names} values {values}'
-      self.query(sql)
+        values = sep.join(values)
+        
+        sql = f'insert into news_questions {names} values {values}'
+        self.query(sql)
+        
+    except Exception as ex:
+      template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+      message = template.format(type(ex).__name__, ex.args)
+      print (message)  
+      pass  # or you could use 'continue'
+
   
   def connect(self):
     
